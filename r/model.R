@@ -15,7 +15,7 @@ data = csv.load("data/train.csv")
 data_test = csv.load("data/test.csv")
 
 # Keep just a part of training dataset
-N = 42000
+N = 10
 data = head(data, N) # Keep the N first examples
 
 # Keep in mind the starting labels
@@ -45,7 +45,6 @@ for (i in 1:dim(labels)[2]) {
   prediction_test[,i] = result_test
 }
 
-print(dim(prediction))
 # 4) Among all the classifiers, get the highest scoring prediction
 for (i in 1:dim(labels)[1]) {
   prediction[i,1] = which.max(prediction[i,]) - 1
