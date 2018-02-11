@@ -1,1 +1,6 @@
 data
+save
+MNIST_data
+submission.csv
+tf_logs
+__pycache__
