@@ -4,3 +4,8 @@ MNIST_data
 submission.csv
 tf_logs
 __pycache__
+python/summary
+python/define
+python/os.path
+python/tmp.py
+python/tf
