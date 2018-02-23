@@ -1,5 +1,6 @@
 data
 save
+save_v1
 MNIST_data
 submission.csv
 tf_logs
