@@ -1,0 +1,2 @@
+1) Draw validation error
+2) Add new layer and load the first layers from the old model

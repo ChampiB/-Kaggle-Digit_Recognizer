@@ -39,17 +39,21 @@ with tf.variable_scope("input"):
 with tf.variable_scope("expected_output"):
     y = tf.placeholder(tf.int64, [None, 10])
 
+training = tf.Variable(False, name="training")
+
 with tf.variable_scope("dnn"):
-    logits = tf.layers.dense(x,      300, activation=tf.nn.relu, name="input_layer")
-    logits = tf.layers.dense(logits, 100, activation=tf.nn.relu, name="hidden_layer_1")
-    logits = tf.layers.dense(logits, 10,  activation=tf.nn.relu, name="output_layer")
-    logits = tf.nn.softmax(logits)
+    logits = tf.layers.dense  (x,      300, activation=tf.nn.relu, name="input_layer")
+    logits = tf.layers.dropout(logits, training=training, name="dropout_1")
+    logits = tf.layers.dense  (logits, 100, activation=tf.nn.relu, name="hidden_layer_1")
+    logits = tf.layers.dropout(logits, training=training, name="dropout_2")
+    logits = tf.layers.dense  (logits, 10,  activation=tf.nn.relu, name="output_layer")
+    logits = tf.nn.softmax    (logits)
 
 with tf.variable_scope("cost"):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=logits))
 
 with tf.variable_scope("optimizer"):
-    optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(cost)
+    optimizer = tf.train.AdamOptimizer(learning_rate=0.0001).minimize(cost)
 
 with tf.variable_scope("prediction"):
     prediction = tf.argmax(logits, 1)
@@ -75,6 +79,8 @@ print("### Start Training ###")
 with tf.Session() as sess:
 
     sess.run(init)
+
+    training.assign(True)
 
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(coord=coord)
