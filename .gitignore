@@ -3,6 +3,8 @@ save
 save_v1
 MNIST_data
 submission.csv
+python/dnn/Todo.txt
+scala
 tf_logs
 __pycache__
 python/summary
