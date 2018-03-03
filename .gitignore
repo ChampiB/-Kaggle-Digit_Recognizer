@@ -1,6 +1,8 @@
 python/cnn/venv
+python/cnn/.idea
 data
 save
+.idea
 save_v1
 MNIST_data
 submission.csv
